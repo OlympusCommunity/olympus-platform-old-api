@@ -1,0 +1,23 @@
+#%RAML 1.0 Trait
+description: Applies security validations to API resources.
+
+headers:
+
+  Client-Id:
+    description: Client identifier for the Application.
+    required: true
+    type: string
+    example: 4fb14679-2757-4e6f-9402-9dc5db6d8dd6
+  Client-Secret: 
+    description: Client Secret for the Application.
+    required: true
+    type: string
+    example: 4fb14679-2757-4e6f-9402-9dc5db6d8dd6
+
+responses:
+  400:
+    description: No access token was sent in the request.
+  401:
+    description: Invalid or expired access token. Request a new token or re-authenticate the application.
+  403:
+    description: Client validation failed (Application).

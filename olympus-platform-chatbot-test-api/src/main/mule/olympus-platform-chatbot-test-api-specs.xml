@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule
+  xmlns="http://www.mulesoft.org/schema/mule/core"
+  xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+  xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+  xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+  xmlns:http="http://www.mulesoft.org/schema/mule/http"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
+  <flow name="olympus-platform-chatbot-test-api-specs-main">
+    <http:listener
+      config-ref="olympus-platform-chatbot-test-api-specs-httpListenerConfig"
+      path="/api/*">
+      <http:response statusCode="#[vars.httpStatus default 200]">
+        <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+      </http:response>
+      <http:error-response statusCode="#[vars.httpStatus default 500]">
+        <http:body>#[payload]</http:body>
+        <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+      </http:error-response>
+    </http:listener>
+    <apikit:router config-ref="olympus-platform-chatbot-test-api-specs-config" />
+    <error-handler ref="Global_Error_Handler" />
+  </flow>
+  <flow name="olympus-platform-chatbot-test-api-specs-console">
+    <http:listener
+      config-ref="olympus-platform-chatbot-test-api-specs-httpListenerConfig"
+      path="/console/*">
+      <http:response statusCode="#[vars.httpStatus default 200]">
+        <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+      </http:response>
+      <http:error-response statusCode="#[vars.httpStatus default 500]">
+        <http:body>#[payload]</http:body>
+        <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+      </http:error-response>
+    </http:listener>
+    <apikit:console config-ref="olympus-platform-chatbot-test-api-specs-config" />
+    <error-handler ref="Console_Error_Handler" />
+  </flow>
+  <flow name="post:\finance:application\json:olympus-platform-chatbot-test-api-specs-config">
+    <logger
+      level="INFO"
+      message='#[%dw 2.0&#10;output application/json&#10;---&#10;{&#10;	endpoint: "post:\finance:application\json:olympus-platform-chatbot-test-api-specs-config",&#10;	data: payload&#10;}]' />
+    <ee:transform
+      doc:name="Request Body"
+      doc:id="b483f4c4-bc5c-4f09-bb77-ef69d96f6333">
+      <ee:message>
+      </ee:message>
+      <ee:variables>
+        <ee:set-variable variableName="request"><![CDATA[%dw 2.0
+output application/json
+---
+{
+	initQuery: payload.query
+}]]></ee:set-variable>
+        <ee:set-variable variableName="audits"><![CDATA[%dw 2.0
+output application/json
+---
+{
+	platform: {
+		id: "WhatsApp",
+		messengerPackageName: payload.messengerPackageName,
+		appPackageName: payload.appPackageName
+	},
+	sender: {
+		name: payload.query.sender,
+		message: payload.query.message,
+		group: payload.query.groupParticipant,
+		isGroup: payload.query.isGroup
+	}
+}]]></ee:set-variable>
+        <ee:set-variable variableName="message"><![CDATA[%dw 2.0
+output application/json
+var message = payload.query.message as String default ""
+---
+if ( sizeOf(message splitBy (" ")) <= 2)
+	(
+		{
+			command: upper((message splitBy (" "))[1]) default "",
+            total: sizeOf(message splitBy (" ")) default 0
+		}
+	)
+else 
+	(
+		{
+			command: upper((message splitBy (" "))[1]) default "",
+			userData: upper((message splitBy (" "))[2]) default "",
+            total: sizeOf(message splitBy (" ")) default 0
+		}
+	)
+]]></ee:set-variable>
+      </ee:variables>
+    </ee:transform>
+    <flow-ref
+      doc:name="implementation-chatbot-process-subflow"
+      doc:id="afe7614f-c1cc-4fe0-a6ca-177e0058a527"
+      name="implementation-chatbot-process-subflow" />
+    <error-handler ref="Global_Error_Handler" />
+  </flow>
+</mule>

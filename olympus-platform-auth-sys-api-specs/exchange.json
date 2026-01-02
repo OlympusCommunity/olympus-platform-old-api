@@ -1,0 +1,23 @@
+{
+  "dependencies": [
+    {
+      "version": "1.0.0",
+      "assetId": "olympus-platform-auth-data-types-lib",
+      "groupId": "127cc2fe-35f4-4856-8bc6-2a6f81e942e8",
+      "provided": false
+    },
+    {
+      "version": "1.0.0",
+      "assetId": "olympus-platform-secure-traits-lib",
+      "groupId": "127cc2fe-35f4-4856-8bc6-2a6f81e942e8",
+      "provided": false
+    }
+  ],
+  "version": "1.0.0",
+  "descriptorVersion": "1.0.0",
+  "classifier": "raml",
+  "main": "olympus-platform-auth-sys-api-specs.raml",
+  "assetId": "olympus-platform-auth-sys-api-specs",
+  "groupId": "127cc2fe-35f4-4856-8bc6-2a6f81e942e8",
+  "name": "olympus-platform-auth-sys-api-specs"
+}

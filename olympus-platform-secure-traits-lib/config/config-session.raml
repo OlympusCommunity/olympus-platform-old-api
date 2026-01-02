@@ -1,0 +1,9 @@
+#%RAML 1.0 Trait
+description: Settings related to lgin and users.
+
+headers:
+
+  Authentication-Type:
+    description: Type of authorization.
+    required: true
+    enum: [default, face, fingerprint, voice, biometricDevice]

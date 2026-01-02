@@ -1,0 +1,49 @@
+apiConfig:
+  prototl: "HTTP"
+  basePath: "/finance/v1/"
+  configPath: "/services"
+  port: "9091"
+  
+autoDiscoveryId: "19809696" 
+ 
+mongodb:
+  host: "olympusplatformcluster1.cggcwqu.mongodb.net"
+  port: "27017"
+  cluster:
+    name: "OlympusPlatformCluster1"
+  databases:
+    finance: 
+      name: "finance"
+      connectionString: mongodb+srv://${secure::mongodb.username}:${secure::mongodb.password}@${mongodb.host}/${mongodb.databases.finance.name}?retryWrites=true&w=majority&appName=${mongodb.cluster.name}
+      collections:
+        currency: "currency"
+        coins: "coins"
+        banks: "banks"
+        reserve: "reserve"
+        accounts: "accounts"
+        users: "users"
+        messages: "messages"
+        wallet: "wallet"
+  
+financeCommands:
+  info: "INFO"
+  start: "START"
+  menu: "MENU"
+  register: "REGISTER"
+  update: "UPDATE"
+  balance: "BALANCE"
+  wallet: "WALLET"
+  accounts: "ACCOUNTS"
+  banks: "BANKS"
+  
+data:
+  banks:
+    binanceBankId: "66b56e2716cdca9bf0a11347"
+    olympusBankId: "66b56e2716cdca9bf0a11348"
+    zycryxBankId: "66b56e2716cdca9bf0a11349"
+  currency:
+    zyxcoinId: "66b55f4a16cdca9bf0a11339"
+    olycoinId: "66ba7ff3af669b15012e66cb"
+    coinId: "66b55f4a16cdca9bf0a11340"
+
+#secure.key: P2@RGa+z$88ezN3w7O[71Q%i

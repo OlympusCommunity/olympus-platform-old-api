@@ -1,0 +1,12 @@
+{
+  "main": "olympus-platform-commons-lib.raml",
+  "name": "olympus-platform-commons-lib",
+  "groupId": "7451b1a7-e6d3-4841-8e9a-ca098a27d945",
+  "assetId": "olympus-platform-commons-lib",
+  "version": "1.0.0",
+  "classifier": "raml-fragment",
+  "tags": [
+    "trait"
+  ],
+  "descriptorVersion": "1.0.0"
+}

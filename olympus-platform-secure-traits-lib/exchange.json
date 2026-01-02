@@ -1,0 +1,13 @@
+{
+  "main": "olympus-platform-secure-traits-lib.raml",
+  "name": "olympus-platform-secure-traits-lib",
+  "groupId": "127cc2fe-35f4-4856-8bc6-2a6f81e942e8",
+  "assetId": "olympus-platform-secure-traits-lib",
+  "version": "1.0.0",
+  "classifier": "raml-fragment",
+  "tags": [],
+  "descriptorVersion": "1.0.0",
+  "organizationId": "127cc2fe-35f4-4856-8bc6-2a6f81e942e8",
+  "apiVersion": "v1",
+  "originalFormatVersion": "1.0"
+}

@@ -1,0 +1,31 @@
+#%RAML 1.0
+title: Olympus Platform - Authentication System API
+description: System API (Sys API) to perform authentication on Olympus Platform
+version: v0
+protocols: [ HTTP, HTTPS ]
+mediaType: [ application/json ]
+baseUri: olympus-platform-authentication.sysapi
+
+documentation:
+  - !include documentation/auth-sys-api-doc.raml
+
+uses:
+  DataTypes: exchange_modules/127cc2fe-35f4-4856-8bc6-2a6f81e942e8/olympus-platform-auth-data-types-lib/1.0.0/olympus-platform-auth-data-types-lib.raml
+  Traits: exchange_modules/127cc2fe-35f4-4856-8bc6-2a6f81e942e8/olympus-platform-secure-traits-lib/1.0.0/olympus-platform-secure-traits-lib.raml
+
+/session:
+  displayName: Olympus Platform Session
+  description: Olympus Platform Session - Sign In and Sign Up
+  is: [Traits.ConfigSession, Traits.SecuredCIE]
+
+  post:
+    description: Genera una nueva sesion de usuario (Login).
+    body:
+      application/json:
+        type: DataTypes.SignInRequest
+    responses:      
+      200:
+        body:
+          application/json:
+            type: DataTypes.AuthenticationResponse
+            example: !include examples/sessions-post-200-token-response.raml
