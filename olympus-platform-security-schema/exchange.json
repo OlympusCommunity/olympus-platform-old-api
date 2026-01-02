@@ -1,0 +1,12 @@
+{
+  "main": "olympus-platform-security-schema.raml",
+  "name": "olympus-platform-security-schema",
+  "groupId": "7451b1a7-e6d3-4841-8e9a-ca098a27d945",
+  "assetId": "olympus-platform-security-schema",
+  "version": "1.0.0",
+  "classifier": "raml-fragment",
+  "tags": [
+    "security_scheme"
+  ],
+  "descriptorVersion": "1.0.0"
+}

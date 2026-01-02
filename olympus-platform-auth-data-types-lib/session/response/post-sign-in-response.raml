@@ -1,0 +1,34 @@
+#%RAML 1.0 DataType
+description: Result of the login process. Contains information about the user who just logged in.
+type: object
+
+properties:
+  session:
+    properties:
+      accessToken?:
+        description: Access token. This must be sent in all API requests that require authentication.
+        type: string
+      expiresIn?:
+        description: Access token validity time in milliseconds.
+        type: number
+      refreshExpiresIn?:
+        description: Refresh token validity time in milliseconds.
+        type: number
+      refreshToken?:
+        description: Refresh token. Used to obtain new access tokens when they expire.
+        type: string
+      sessionState?: 
+        description: Session state identifier.
+        type: string
+  user:
+    properties:
+      uuid:
+        description: User UUID Identification
+        type: string
+      username:
+        description: username logged
+        type: string
+      status:
+        type: string
+      info:
+        type: string
